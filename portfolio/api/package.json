@@ -1,0 +1,10 @@
+{
+  "name": "portfolio-api",
+  "version": "1.0.0",
+  "description": "Managed API for the portfolio contact form",
+  "private": true,
+  "main": "contact/index.js",
+  "engines": {
+    "node": ">=18"
+  }
+}

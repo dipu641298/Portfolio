@@ -1,0 +1,123 @@
+Title: Home
+Description: Senior .NET software engineer in Dhaka — microservices, Azure, and clean architecture.
+---
+@{
+    var name = Document.GetString("SiteTitle", "Your Name");
+    var role = Document.GetString("SiteRole", "");
+    var tagline = Document.GetString("SiteTagline", "");
+    var location = Document.GetString("SiteLocation", "");
+    var email = Document.GetString("SiteEmail", "");
+}
+
+<section class="hero">
+    <p class="hero__kicker">@role</p>
+    <h1 class="hero__name">@name</h1>
+    @if (!string.IsNullOrWhiteSpace(tagline))
+    {
+        <p class="hero__tagline">@tagline</p>
+    }
+    <div class="hero__meta">
+        @if (!string.IsNullOrWhiteSpace(location)) { <span>@location</span> }
+        @if (!string.IsNullOrWhiteSpace(email)) { <a href="mailto:@email">@email</a> }
+    </div>
+</section>
+
+<section class="section">
+    <h2 class="section__title">About</h2>
+    <div class="prose">
+        <p>
+            I'm a software engineer based in Dhaka with over five years building enterprise-grade
+            applications in .NET Core, .NET Framework, React, and Azure. Most of my work has been
+            on one of the largest web-based healthcare SaaS platforms in the U.S., where I design
+            microservices, lead a small team, and help keep mission-critical systems running.
+        </p>
+        <p>
+            I care about clean architecture, pragmatic performance work, and code that's easy for
+            the next person to maintain. Outside of work I spent years in competitive programming —
+            as a contestant, problem setter, and judge — which is where a lot of my problem-solving
+            instincts come from.
+        </p>
+    </div>
+</section>
+
+<section class="section">
+    <h2 class="section__title">Skills</h2>
+    <dl class="skills">
+        <div class="skill-row">
+            <dt>Languages</dt>
+            <dd>C#, SQL, JavaScript, HTML, CSS</dd>
+        </div>
+        <div class="skill-row">
+            <dt>Frameworks</dt>
+            <dd>ASP.NET Core, .NET Framework, VB.NET, React, EF Core, Dapper</dd>
+        </div>
+        <div class="skill-row">
+            <dt>Cloud &amp; DevOps</dt>
+            <dd>Azure App Service, Container Apps, Cosmos DB, App Configuration, Key Vault, App Insights, Azure DevOps (CI/CD), Docker</dd>
+        </div>
+        <div class="skill-row">
+            <dt>Practices</dt>
+            <dd>Agile (Scrum), SAFe, Clean Architecture, SOLID, MVC</dd>
+        </div>
+    </dl>
+</section>
+
+<section class="section">
+    <h2 class="section__title">Experience</h2>
+    <div class="timeline">
+        <article class="entry">
+            <div class="entry__period">Feb 2021 — Present</div>
+            <div>
+                <h3 class="entry__role">Senior Software Engineer (Level 3)</h3>
+                <p class="entry__company">Enosis Solutions · Dhaka, Bangladesh</p>
+                <div class="entry__summary">
+                    <p>
+                        Building and maintaining a large U.S. healthcare SaaS platform —
+                        patient-facing portals, communication services, and reporting systems —
+                        across .NET Core, .NET Framework, VB.NET, and JavaScript with SQL Server.
+                    </p>
+                    <ul>
+                        <li>Lead a sub-team of 4 within a 40+ developer group, owning task distribution, code reviews, and client communication.</li>
+                        <li>Integrated 6 essential third-party services including payment gateways, e-prescriptions, and insurance checks, materially increasing the product's value.</li>
+                        <li>Redesigned the patient medical-history workflow to retain only significant rows, cutting data density by 86% while preserving full historical records.</li>
+                        <li>Migrated legacy VB.NET modules to modern .NET Core microservices, reducing technical debt.</li>
+                        <li>Built a React mobile-first app for treatment selection, scheduling, and payments, secured with QR-code scanning and SMS-based authentication.</li>
+                        <li>Applied SOLID, MVC, and Clean Architecture; used Dapper extensively in production and Azure (App Service, Container Apps, Cosmos DB, Key Vault, DevOps) for delivery.</li>
+                    </ul>
+                </div>
+            </div>
+        </article>
+    </div>
+</section>
+
+<section class="section">
+    <h2 class="section__title">Education</h2>
+    <div class="timeline">
+        <article class="entry">
+            <div class="entry__period">2016 — 2020</div>
+            <div>
+                <h3 class="entry__role">B.Sc. in Computer Science &amp; Engineering</h3>
+                <p class="entry__company">Ahsanullah University of Science and Technology</p>
+                <div class="entry__summary"><p>CGPA 3.31 / 4.00</p></div>
+            </div>
+        </article>
+    </div>
+</section>
+
+<section class="section">
+    <h2 class="section__title">Certifications</h2>
+    <dl class="skills">
+        <div class="skill-row">
+            <dt>Dec 2025</dt>
+            <dd>OWASP Top 10 — The Linux Foundation</dd>
+        </div>
+        <div class="skill-row">
+            <dt>Dec 2025</dt>
+            <dd>HIPAA HiTech Privacy — The Linux Foundation</dd>
+        </div>
+        <div class="skill-row">
+            <dt>Mar 2023</dt>
+            <dd>Security Awareness — Inspired e-Learning</dd>
+        </div>
+    </dl>
+</section>

@@ -1,0 +1,45 @@
+Title: Writing
+Description: Articles and notes on engineering and the craft.
+---
+@{
+    var posts = OutputPages
+        .Where(d => !d.Source.IsNullOrEmpty
+                    && d.Source.Parent.Name == "blog"
+                    && d.Source != Document.Source)
+        .OrderByDescending(d => d.GetDateTime("Published"))
+        .ToList();
+}
+
+<section class="hero">
+    <p class="hero__kicker">Writing</p>
+    <h1 class="hero__name">Notes &amp; articles</h1>
+    <p class="hero__tagline">Occasional posts on engineering, tools, and the craft.</p>
+</section>
+
+<section class="section">
+    @if (posts.Any())
+    {
+        <ul class="postlist">
+            @foreach (var post in posts)
+            {
+                var published = post.GetDateTime("Published");
+                var desc = post.GetString("Description");
+                <li class="postlist__item">
+                    @if (published != default(DateTime))
+                    {
+                        <div class="postlist__date">@published.ToString("MMM d, yyyy")</div>
+                    }
+                    <h2 class="postlist__title"><a href="/@post.Destination">@post.GetString("Title")</a></h2>
+                    @if (!string.IsNullOrWhiteSpace(desc))
+                    {
+                        <p class="postlist__excerpt">@desc</p>
+                    }
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p class="prose">No posts yet — your first article will appear here.</p>
+    }
+</section>

@@ -1,0 +1,80 @@
+@{
+    var siteTitle = Document.GetString("SiteTitle", "Portfolio");
+    var pageTitle = Document.GetString("Title");
+    var dest = Document.Destination;
+    var isHome = !dest.IsNullOrEmpty
+                 && dest.FileName.ToString() == "index.html"
+                 && dest.Parent.IsNullOrEmpty;
+    var fullTitle = isHome || string.IsNullOrWhiteSpace(pageTitle) || pageTitle == siteTitle
+        ? siteTitle
+        : $"{pageTitle} — {siteTitle}";
+    var src = Document.Source;
+    var isPost = !src.IsNullOrEmpty
+                 && src.Parent.Name == "blog"
+                 && src.FileName.ToString() != "index.cshtml";
+    var published = Document.GetDateTime("Published");
+    var description = Document.GetString("Description", Document.GetString("SiteTagline", ""));
+    var email = Document.GetString("SiteEmail", "");
+    var gitHub = Document.GetString("GitHubUrl", "");
+    var linkedIn = Document.GetString("LinkedInUrl", "");
+    var year = DateTime.UtcNow.Year;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@fullTitle</title>
+    <meta name="description" content="@description" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/site.css" />
+</head>
+<body>
+    <header class="masthead">
+        <div class="wrap masthead__inner">
+            <a class="brand" href="/">@siteTitle</a>
+            <nav class="nav" aria-label="Primary">
+                <a href="/">About</a>
+                <a href="/blog">Writing</a>
+                <a href="/contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="wrap">
+        <main>
+            @if (isPost)
+            {
+                <article class="prose">
+                    <a class="backlink" href="/blog">← Writing</a>
+                    <header class="post__header">
+                        @if (published != default(DateTime))
+                        {
+                            <div class="post__date">@published.ToString("MMM d, yyyy")</div>
+                        }
+                        <h1 class="post__title">@pageTitle</h1>
+                    </header>
+                    @RenderBody()
+                </article>
+            }
+            else
+            {
+                @RenderBody()
+            }
+        </main>
+    </div>
+
+    <footer class="foot">
+        <div class="wrap foot__inner">
+            <span>© @year @siteTitle</span>
+            <div class="foot__links">
+                @if (!string.IsNullOrWhiteSpace(gitHub)) { <a href="@gitHub" rel="me noopener" target="_blank">GitHub</a> }
+                @if (!string.IsNullOrWhiteSpace(linkedIn)) { <a href="@linkedIn" rel="me noopener" target="_blank">LinkedIn</a> }
+                @if (!string.IsNullOrWhiteSpace(email)) { <a href="mailto:@email">Email</a> }
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
